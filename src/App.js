@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
 import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import UserList from './component/UserList';
+import SearchBox from './component/SearchBox';
+import getUsersRequest from './services/user-service'
+import debounce from 'lodash.debounce';
 
-function App() {
+
+const App = () => {
+  const [users, setUsers] = useState([])
+  const [searchValue, setSearchValue] = useState('')
+
+  const getUser = async (searchValue, cb) => {
+    const res = await getUsersRequest(searchValue);
+    cb(res)
+    console.warn('tag', '')
+
+  };
+
+  const debouncedGetUser = debounce((searchValue, cb) => {
+    getUser(searchValue, cb);
+  }, 500);
+
+  useEffect(() => {
+    debouncedGetUser(searchValue, res => {
+      const { items } = res.data
+      setUsers(items);
+    })
+  }, [searchValue]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="py-4 container">
+      <div className='row justify-content-center'>
+        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+        <UserList users={users} />
+
+      </div>
+
     </div>
   );
 }
