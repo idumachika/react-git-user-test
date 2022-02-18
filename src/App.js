@@ -28,7 +28,6 @@ const App = () => {
         setError(error.response.data.message)
         console.log("this is error ", error.response)
         setLoading(false)
-
       });
     console.warn('tag', '')
 
