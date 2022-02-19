@@ -21,7 +21,7 @@ const UserList = ({ loading, error, users, }) => {
                                 <h3>{user.login}</h3>
                                 <div className="card-footer">
                                     <p>Score: {user.score}</p>
-                                    <a href={user.url}>{user.url}</a>
+                                    <a href={user.html_url}>{user.html_url}</a>
                                 </div>
                             </div>
                         </article>

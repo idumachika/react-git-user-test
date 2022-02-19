@@ -52,7 +52,7 @@ const App = () => {
 
   const debouncedGetUser = debounce((searchValue, cb) => {
     getUser(searchValue, cb);
-  }, 300);
+  }, 1000);
 
   useEffect(() => {
     debouncedGetUser(searchValue, res => {
