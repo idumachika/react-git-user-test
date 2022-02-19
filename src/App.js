@@ -29,6 +29,7 @@ const App = () => {
         setLoading(false)
         setError(true)
       });
+    console.warn("fetching")
 
   };
 
@@ -52,7 +53,7 @@ const App = () => {
 
   const debouncedGetUser = debounce((searchValue, cb) => {
     getUser(searchValue, cb);
-  }, 1000);
+  }, 500);
 
   useEffect(() => {
     debouncedGetUser(searchValue, res => {
