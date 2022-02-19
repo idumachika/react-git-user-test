@@ -1,30 +1,36 @@
 import React from 'react';
 
-const UserList = (props) => {
-    console.log("component error", props.error)
-    if (props.loading) <h2>Loding....</h2>
+const UserList = ({ loading, error, users, }) => {
 
-    return (
-        <section className='cards'>
-            {props.users.map((user, index) => (
-                <article className='card'>
-                    <img
-                        src={user.avatar_url}
-                        alt="photo"
-                    />
+    if (loading) {
+        return <div>Loading...</div>
+    } else if (error) {
+        return <div>Error Occurred fetching data. Please try again later!</div>
+    } else {
+        return (
+            <section className='cards'>
+                {
+                    users.map((user, index) => (
+                        <article className='card' key={index}>
+                            <img
+                                src={user.avatar_url}
+                                alt="photo"
+                            />
 
-                    <div className="info">
-                        <h3>{user.login}</h3>
-                        <div className="card-footer">
-                            <p>Score: {user.score}</p>
-                            <a href={user.url}>{user.url}</a>
-                        </div>
-                    </div>
-                </article>
+                            <div className="info">
+                                <h3>{user.login}</h3>
+                                <div className="card-footer">
+                                    <p>Score: {user.score}</p>
+                                    <a href={user.url}>{user.url}</a>
+                                </div>
+                            </div>
+                        </article>
 
-            ))}
-        </section>
-    );
+                    ))}
+            </section>
+        );
+    }
+
 
 
 };
