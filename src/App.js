@@ -3,7 +3,6 @@ import UserList from './component/UserList';
 import SearchBox from './component/SearchBox';
 import getUsersRequest from './services/user-service'
 import debounce from 'debounce-promise';
-
 import Pagination from './component/Pagination';
 
 const App = () => {
@@ -53,7 +52,7 @@ const App = () => {
 
   const debouncedGetUser = debounce((searchValue, cb) => {
     getUser(searchValue, cb);
-  }, 500);
+  }, 300);
 
   useEffect(() => {
     debouncedGetUser(searchValue, res => {
